@@ -31,20 +31,14 @@ public class SunTimeController {
     }
 
     @GetMapping("/sunrise")
-    public List<SunriseDto> getSunriseReport(
-            @RequestParam(required = false) LocalDate date,
-            @RequestParam String city
-    ) {
+    public List<SunriseDto> getSunrise(@RequestParam(required = false) LocalDate date, @RequestParam String city) {
         if (date == null) date = LocalDate.now();
         List<City> cities = getCities(city);
         return sunriseService.getSunriseList(date, cities);
     }
 
     @GetMapping("/sunset")
-    public List<SunsetDto> getSunsetReport(
-            @RequestParam(required = false) LocalDate date,
-            @RequestParam String city
-    ) {
+    public List<SunsetDto> getSunset(@RequestParam(required = false) LocalDate date, @RequestParam String city) {
         if (date == null) date = LocalDate.now();
         List<City> cities = getCities(city);
         return sunsetService.getSunsetList(date, cities);
