@@ -25,10 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username)
+    public UserDetails loadUserByUsername(String name)
             throws UsernameNotFoundException {
-        Member member = memberRepository.findByName(username)
-                .orElseThrow(() -> new UsernameNotFoundException(username));
+        Member member = memberRepository.findByName(name)
+                .orElseThrow(() -> new UsernameNotFoundException(name));
 
         List<SimpleGrantedAuthority> roles = new ArrayList<>();
         for (Role role : member.getRoles()) {
