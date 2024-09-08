@@ -23,8 +23,8 @@ public class DtoMapper {
         return new MemberDto(member.getMemberId(), member.getName(), member.getEmail(), toRoleDtoSet(member.getRoles()));
     }
 
-    public static Set<MemberDto> toMemberDtoSet(Set<Member> members) {
-        return members.stream().map(DtoMapper::toMemberDto).collect(Collectors.toSet());
+    public static List<MemberDto> toMemberDtoList(List<Member> members) {
+        return members.stream().map(DtoMapper::toMemberDto).toList();
     }
 
     public static Set<RoleDto> toRoleDtoSet(Set<Role> memberRoles) {

@@ -2,8 +2,10 @@ package org.codecool.backend.controller;
 
 import org.codecool.backend.model.dto.CityDto;
 import org.codecool.backend.model.dto.SunriseDto;
+import org.codecool.backend.model.dto.SunsetDto;
 import org.codecool.backend.model.payload.CreateCityRequest;
 import org.codecool.backend.model.payload.CreateSunriseRequest;
+import org.codecool.backend.model.payload.CreateSunsetRequest;
 import org.codecool.backend.service.CityService;
 import org.codecool.backend.service.MemberService;
 import org.codecool.backend.service.SunriseService;
@@ -31,6 +33,8 @@ public class AdminController {
         this.memberService = memberService;
     }
 
+    //City
+
     @PostMapping("/edit/add/city")
     public CityDto addCity(@RequestBody CreateCityRequest createCityRequest) {
         return cityService.addNewCity(createCityRequest);
@@ -47,4 +51,47 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    //Sunrise
+
+    @PostMapping("/edit/add/sunrise")
+    public SunriseDto addSunrise(@RequestBody CreateSunriseRequest sunriseRequest) {
+        return sunriseService.addNewSunrise(sunriseRequest);
+    }
+
+    @PatchMapping("/edit/update/sunrise/{date}+{cityName}+{cityCountry}+{cityState}")
+    public SunriseDto updateSunrise(@PathVariable String date, @PathVariable String cityName, @PathVariable String cityCountry, @PathVariable String cityState, @RequestBody SunriseDto requestDto) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate lDate = LocalDate.parse(date, format);
+        return sunriseService.updateSunrise(lDate, cityName, cityCountry, cityState, requestDto);
+    }
+
+    @DeleteMapping("edit/delete/sunrise/{date}+{cityName}+{cityCountry}+{cityState}")
+    public ResponseEntity<?> deleteSunrise(@PathVariable String date, @PathVariable String cityName, @PathVariable String cityCountry, @PathVariable String cityState) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate lDate = LocalDate.parse(date, format);
+        sunriseService.deleteSunrise(lDate, cityName, cityCountry, cityState);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    //Sunset
+
+    @PostMapping("/edit/add/sunset")
+    public SunsetDto addSunset(@RequestBody CreateSunsetRequest sunsetRequest) {
+        return sunsetService.addNewSunset(sunsetRequest);
+    }
+
+    @PatchMapping("/edit/update/sunset/{date}+{cityName}+{cityCountry}+{cityState}")
+    public SunsetDto updateSunset(@PathVariable String date, @PathVariable String cityName, @PathVariable String cityCountry, @PathVariable String cityState, @RequestBody SunsetDto requestDto) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate lDate = LocalDate.parse(date, format);
+        return sunsetService.updateSunset(lDate, cityName, cityCountry, cityState, requestDto);
+    }
+
+    @DeleteMapping("edit/delete/sunset/{date}+{cityName}+{cityCountry}+{cityState}")
+    public ResponseEntity<?> deleteSunset(@PathVariable String date, @PathVariable String cityName, @PathVariable String cityCountry, @PathVariable String cityState) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate lDate = LocalDate.parse(date, format);
+        sunsetService.deleteSunset(lDate, cityName, cityCountry, cityState);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

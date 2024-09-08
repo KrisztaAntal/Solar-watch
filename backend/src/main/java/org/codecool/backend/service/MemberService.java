@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -42,9 +41,9 @@ public class MemberService {
         this.jwtUtils = jwtUtils;
     }
 
-    public Set<MemberDto> getAllMembers() {
-        Set<Member> members = new HashSet<>(memberRepository.findAll());
-        return DtoMapper.toMemberDtoSet(members);
+    public List<MemberDto> getAllMembers() {
+        List<Member> members = memberRepository.findAll();
+        return DtoMapper.toMemberDtoList(members);
     }
 
     public void createNewMember(CreateMemberRequest signUpRequest) {
