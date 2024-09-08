@@ -1,4 +1,4 @@
-package org.codecool.backend.controller;
+package org.codecool.backend.controller.member;
 
 import org.codecool.backend.controller.exception.UnauthorizedChangeException;
 import org.codecool.backend.model.dto.MemberDto;

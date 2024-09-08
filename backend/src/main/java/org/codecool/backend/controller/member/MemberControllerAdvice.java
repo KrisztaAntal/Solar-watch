@@ -1,9 +1,7 @@
-package org.codecool.backend.controller;
+package org.codecool.backend.controller.member;
 
-import jakarta.validation.constraints.NotNull;
 import org.codecool.backend.controller.exception.ExistingUsernameException;
-import org.codecool.backend.controller.exception.InvalidCityException;
-import org.codecool.backend.controller.exception.MemberNotFoundException;
+import org.codecool.backend.controller.exception.NoSuchEntityInDBException;
 import org.codecool.backend.controller.exception.UnauthorizedChangeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,9 +19,9 @@ public class MemberControllerAdvice {
     }
 
     @ResponseBody
-    @ExceptionHandler(MemberNotFoundException.class)
+    @ExceptionHandler(NoSuchEntityInDBException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleMemberNotFoundException(MemberNotFoundException e) {return e.getMessage();}
+    public String handleNoSuchEntityInDBException(NoSuchEntityInDBException e) {return e.getMessage();}
 
     @ResponseBody
     @ExceptionHandler(ExistingUsernameException.class)

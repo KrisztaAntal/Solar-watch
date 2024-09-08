@@ -1,6 +1,7 @@
 package org.codecool.backend.service;
 
 import org.codecool.backend.controller.exception.ExistingUsernameException;
+import org.codecool.backend.controller.exception.NoSuchEntityInDBException;
 import org.codecool.backend.model.dto.DtoMapper;
 import org.codecool.backend.model.dto.MemberDto;
 import org.codecool.backend.model.entity.Member;
@@ -9,7 +10,6 @@ import org.codecool.backend.model.payload.*;
 import org.codecool.backend.repository.MemberRepository;
 import org.codecool.backend.repository.RoleRepository;
 import org.codecool.backend.security.jwt.JwtUtils;
-import org.codecool.backend.controller.exception.MemberNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -86,16 +86,23 @@ public class MemberService {
     }
 
     public MemberDto changeMemberEmail(String username, ChangeEmailRequest request) {
-        Member currentMember = memberRepository.findByName(username).orElseThrow(MemberNotFoundException::new);
+        Member currentMember = memberRepository.findByName(username).orElseThrow(()-> new NoSuchEntityInDBException("No such member in the database"));
         currentMember.setEmail(request.getNewEmail());
         memberRepository.save(currentMember);
         return DtoMapper.toMemberDto(currentMember);
     }
 
     public void addAdminRole(UUID memberId) {
-        Member member = memberRepository.findByMemberId(memberId).orElseThrow(MemberNotFoundException::new);
+        Member member = memberRepository.findByMemberId(memberId).orElseThrow(()-> new NoSuchEntityInDBException("No such member in the database"));
         Role role = roleRepository.findByName("ROLE_ADMIN").orElseThrow();
         member.getRoles().add(role);
+        memberRepository.save(member);
+    }
+
+    public void removeAdminRole(UUID memberId) {
+        Member member = memberRepository.findByMemberId(memberId).orElseThrow(()-> new NoSuchEntityInDBException("No such member in the database"));
+        Role role = roleRepository.findByName("ROLE_ADMIN").orElseThrow();
+        member.getRoles().remove(role);
         memberRepository.save(member);
     }
 
@@ -105,12 +112,12 @@ public class MemberService {
     }
 
     public void deleteMemberById(UUID memberId) {
-        Member currentMember = memberRepository.findByMemberId(memberId).orElseThrow(MemberNotFoundException::new);
+        Member currentMember = memberRepository.findByMemberId(memberId).orElseThrow(()-> new NoSuchEntityInDBException("No such member in the database"));
         memberRepository.delete(currentMember);
     }
 
     private Member findCurrentMemberByName(String username) {
-        return memberRepository.findByName(username).orElseThrow(MemberNotFoundException::new);
+        return memberRepository.findByName(username).orElseThrow(()-> new NoSuchEntityInDBException("No such member in the database"));
     }
 
     private JwtResponse generateJwtResponseWithNewToken(Member currentMember) {

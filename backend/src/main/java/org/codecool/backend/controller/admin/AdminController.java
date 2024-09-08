@@ -1,4 +1,4 @@
-package org.codecool.backend.controller;
+package org.codecool.backend.controller.admin;
 
 import org.codecool.backend.model.dto.CityDto;
 import org.codecool.backend.model.dto.SunriseDto;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @RequestMapping("/api")
 @RestController
@@ -92,6 +93,26 @@ public class AdminController {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate lDate = LocalDate.parse(date, format);
         sunsetService.deleteSunset(lDate, cityName, cityCountry, cityState);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    //Member
+
+    @PatchMapping("/edit/user/{userid}/add-admin-role")
+    public ResponseEntity<?> addAdminRoleToMember(@PathVariable UUID userid) {
+        memberService.addAdminRole(userid);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/edit/user/{userid}/delete-admin-role")
+    public ResponseEntity<?> removeAdminRoleToMember(@PathVariable UUID userid) {
+        memberService.removeAdminRole(userid);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("edit/delete/user/{userId}")
+    public ResponseEntity<Void> deleteUserById(@PathVariable UUID userId) {
+        memberService.deleteMemberById(userId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

@@ -1,4 +1,4 @@
-package org.codecool.backend.controller;
+package org.codecool.backend.controller.time;
 
 import org.codecool.backend.model.dto.SunriseDto;
 import org.codecool.backend.model.dto.SunsetDto;
