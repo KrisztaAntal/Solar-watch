@@ -1,6 +1,6 @@
 package org.codecool.backend.model.payload;
 
-import java.util.List;
+import java.util.Set;
 
-public record JwtResponse(String jwt, String userName, List<String> roles) {
+public record JwtResponse(String jwt, String userName, Set<String> roles) {
 }

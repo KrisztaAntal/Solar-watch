@@ -7,9 +7,9 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 @Getter
 @Setter
-@Entity
 public class Role {
 
     @Id

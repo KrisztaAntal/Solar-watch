@@ -9,9 +9,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@Entity
 @Getter
 @Setter
-@Entity
 public class Member {
 
     @Id
@@ -21,8 +21,8 @@ public class Member {
     private UUID memberId;
 
     @Column(unique = true)
-    @NotNull(message = "Email cannot be empty")
-    @NotEmpty(message = "Email cannot be empty")
+    @NotNull(message = "Username cannot be null")
+    @NotEmpty(message = "Username cannot be empty")
     private String name;
 
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
@@ -55,5 +55,9 @@ public class Member {
 
     public void addRole(Role role) {
         roles.add(role);
+    }
+
+    public void removeRole(Role role) {
+        roles.remove(role);
     }
 }

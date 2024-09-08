@@ -1,9 +1,15 @@
 package org.codecool.backend.service;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.codecool.backend.controller.exception.EntityAlreadyInDBException;
 import org.codecool.backend.controller.exception.InvalidCityException;
+import org.codecool.backend.model.dto.CityDto;
+import org.codecool.backend.model.dto.DtoMapper;
 import org.codecool.backend.model.entity.City;
+import org.codecool.backend.model.payload.CreateCityRequest;
 import org.codecool.backend.model.report.city.OpenWeatherCityReport;
 import org.codecool.backend.repository.CityRepository;
+import org.codecool.backend.utils.Patcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +31,13 @@ public class CityService {
 
     private static final Logger logger = LoggerFactory.getLogger(CityService.class);
 
+    private final Patcher patcher;
+
     @Autowired
-    public CityService(WebClient webClient, CityRepository cityRepository) {
+    public CityService(WebClient webClient, CityRepository cityRepository, Patcher patcher) {
         this.webClient = webClient;
         this.cityRepository = cityRepository;
+        this.patcher = patcher;
     }
 
     public List<City> getAllCityByName(String city) {
@@ -64,5 +73,38 @@ public class CityService {
             throw new InvalidCityException();
         }
         return cityDataArray;
+    }
+
+    public CityDto addNewCity(CreateCityRequest cityRequest) {
+        City newCity = saveCityInDB(cityRequest.getName(), cityRequest.getCountry(), cityRequest.getState(), cityRequest.getLongitude(), cityRequest.getLatitude());
+        return new CityDto(newCity.getName(), newCity.getLatitude(), newCity.getLongitude(), cityRequest.getCountry(), cityRequest.getState());
+    }
+
+    public City saveCityInDB(String name, String country, String state, double longitude, double latitude) {
+        City cityToSave = new City(name, country, state, longitude, latitude);
+        if (checkIfNotInDB(cityToSave)) {
+            cityRepository.save(cityToSave);
+            return cityRepository.findByLongitudeAndLatitude(longitude, latitude).orElseThrow();
+        } else throw new EntityAlreadyInDBException("City is already in the database");
+    }
+
+    public void deleteCity(String cityName, String cityCountry, String cityState) {
+        City city = getCityByNameStateAndCountryFromDB(cityName, cityCountry, cityState);
+        cityRepository.delete(city);
+    }
+
+    private City getCityByNameStateAndCountryFromDB(String cityName, String cityCountry, String cityState) {
+        return cityRepository.findByNameAndCountryAndState(cityName, cityCountry, cityState).orElseThrow(() -> new EntityNotFoundException("City is not in database"));
+    }
+
+    public CityDto updateCity(String cityName, String cityCountry, String cityState, CityDto cityDto) {
+        City city = getCityByNameStateAndCountryFromDB(cityName, cityCountry, cityState);
+        try {
+            patcher.cityPatcher(city, cityDto);
+            cityRepository.save(city);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        return new CityDto(city.getName(), city.getLatitude(), city.getLongitude(), city.getCountry(), city.getState());
     }
 }
