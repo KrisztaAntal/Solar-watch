@@ -4,12 +4,10 @@ import jakarta.persistence.EntityNotFoundException;
 import org.codecool.backend.controller.exception.EntityAlreadyInDBException;
 import org.codecool.backend.controller.exception.InvalidCityException;
 import org.codecool.backend.model.dto.CityDto;
-import org.codecool.backend.model.dto.DtoMapper;
 import org.codecool.backend.model.entity.City;
 import org.codecool.backend.model.payload.CreateCityRequest;
 import org.codecool.backend.model.report.city.OpenWeatherCityReport;
 import org.codecool.backend.repository.CityRepository;
-import org.codecool.backend.utils.Patcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -31,13 +28,11 @@ public class CityService {
 
     private static final Logger logger = LoggerFactory.getLogger(CityService.class);
 
-    private final Patcher patcher;
 
     @Autowired
-    public CityService(WebClient webClient, CityRepository cityRepository, Patcher patcher) {
+    public CityService(WebClient webClient, CityRepository cityRepository) {
         this.webClient = webClient;
         this.cityRepository = cityRepository;
-        this.patcher = patcher;
     }
 
     public List<City> getAllCityByName(String city) {
@@ -99,12 +94,22 @@ public class CityService {
 
     public CityDto updateCity(String cityName, String cityCountry, String cityState, CityDto cityDto) {
         City city = getCityByNameStateAndCountryFromDB(cityName, cityCountry, cityState);
-        try {
-            patcher.cityPatcher(city, cityDto);
-            cityRepository.save(city);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        if (cityDto.name() != null) {
+            city.setName(cityDto.name());
         }
+        if (cityDto.lat() != null) {
+            city.setLatitude(cityDto.lat());
+        }
+        if (cityDto.lon() != null) {
+            city.setLongitude(cityDto.lon());
+        }
+        if (cityDto.state() != null) {
+            city.setState(cityDto.state());
+        }
+        if (cityDto.country() != null) {
+            city.setCountry(cityDto.country());
+        }
+        cityRepository.save(city);
         return new CityDto(city.getName(), city.getLatitude(), city.getLongitude(), city.getCountry(), city.getState());
     }
 }

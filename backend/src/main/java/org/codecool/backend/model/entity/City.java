@@ -30,4 +30,13 @@ public class City {
         this.longitude = longitude;
         this.latitude = latitude;
     }
+
+    public City(Long id, String name, String country, String state, double longitude, double latitude) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+        this.state = state;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 }
