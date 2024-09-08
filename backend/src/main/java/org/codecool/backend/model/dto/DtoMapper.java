@@ -2,6 +2,7 @@ package org.codecool.backend.model.dto;
 
 import org.codecool.backend.model.entity.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,10 @@ public class DtoMapper {
 
     public static MemberDto toMemberDto(Member member) {
         return new MemberDto(member.getMemberId(), member.getName(), member.getEmail(), toRoleDtoSet(member.getRoles()));
+    }
+
+    public static Set<MemberDto> toMemberDtoSet(Set<Member> members) {
+        return members.stream().map(DtoMapper::toMemberDto).collect(Collectors.toSet());
     }
 
     public static Set<RoleDto> toRoleDtoSet(Set<Role> memberRoles) {

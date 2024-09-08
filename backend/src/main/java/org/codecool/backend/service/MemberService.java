@@ -19,8 +19,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
@@ -39,6 +42,11 @@ public class MemberService {
         this.jwtUtils = jwtUtils;
     }
 
+    public Set<MemberDto> getAllMembers() {
+        Set<Member> members = new HashSet<>(memberRepository.findAll());
+        return DtoMapper.toMemberDtoSet(members);
+    }
+
     public void createNewMember(CreateMemberRequest signUpRequest) {
         Member member = new Member(signUpRequest.getUsername(), signUpRequest.getEmail(), passwordEncoder.encode(signUpRequest.getPassword()));
         if (memberRepository.findByName(member.getName()).isEmpty()) {
@@ -49,7 +57,7 @@ public class MemberService {
     }
 
     public MemberDto getCurrentUserInfo(String username) {
-        Member currentMember = memberRepository.findByName(username).orElseThrow(MemberNotFoundException::new);
+        Member currentMember = findCurrentMemberByName(username);
         return DtoMapper.toMemberDto(currentMember);
     }
 
@@ -60,27 +68,22 @@ public class MemberService {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         User userDetails = (User) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
-
+        Set<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         return new JwtResponse(jwt, userDetails.getUsername(), roles);
     }
 
     public JwtResponse changeUsername(String username, ChangeUsernameRequest request) {
-        Member currentMember = memberRepository.findByName(username).orElseThrow(MemberNotFoundException::new);
+        Member currentMember = findCurrentMemberByName(username);
         currentMember.setName(request.getNewUsername());
         memberRepository.save(currentMember);
-        String jwt = jwtUtils.generateNewJwtTokenOnNameOrPasswordChange(currentMember.getName());
-        List<String> roles = currentMember.getRoles().stream().map(Role::getName).toList();
-        return new JwtResponse(jwt, currentMember.getName(), roles);
+        return generateJwtResponseWithNewToken(currentMember);
     }
 
     public JwtResponse changeMemberPassword(String username, ChangePasswordRequest request) {
-        Member currentMember = memberRepository.findByName(username).orElseThrow(MemberNotFoundException::new);
+        Member currentMember = findCurrentMemberByName(username);
         currentMember.setPassword(passwordEncoder.encode(request.getPassword()));
         memberRepository.save(currentMember);
-        String jwt = jwtUtils.generateNewJwtTokenOnNameOrPasswordChange(currentMember.getName());
-        List<String> roles = currentMember.getRoles().stream().map(Role::getName).toList();
-        return new JwtResponse(jwt, currentMember.getName(), roles);
+        return generateJwtResponseWithNewToken(currentMember);
     }
 
     public MemberDto changeMemberEmail(String username, ChangeEmailRequest request) {
@@ -98,12 +101,22 @@ public class MemberService {
     }
 
     public void deleteMe(String username) {
-        Member currentMember = memberRepository.findByName(username).orElseThrow(MemberNotFoundException::new);
+        Member currentMember = findCurrentMemberByName(username);
         memberRepository.delete(currentMember);
     }
 
     public void deleteMemberById(UUID memberId) {
         Member currentMember = memberRepository.findByMemberId(memberId).orElseThrow(MemberNotFoundException::new);
         memberRepository.delete(currentMember);
+    }
+
+    private Member findCurrentMemberByName(String username) {
+        return memberRepository.findByName(username).orElseThrow(MemberNotFoundException::new);
+    }
+
+    private JwtResponse generateJwtResponseWithNewToken(Member currentMember) {
+        String jwt = jwtUtils.generateNewJwtTokenOnNameOrPasswordChange(currentMember.getName());
+        Set<String> roles = currentMember.getRoles().stream().map(Role::getName).collect(Collectors.toSet());
+        return new JwtResponse(jwt, currentMember.getName(), roles);
     }
 }

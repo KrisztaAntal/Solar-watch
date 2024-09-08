@@ -1,14 +1,17 @@
 package org.codecool.backend.controller;
 
+import jakarta.validation.constraints.NotNull;
 import org.codecool.backend.controller.exception.ExistingUsernameException;
 import org.codecool.backend.controller.exception.InvalidCityException;
 import org.codecool.backend.controller.exception.MemberNotFoundException;
 import org.codecool.backend.controller.exception.UnauthorizedChangeException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+@ControllerAdvice
 public class MemberControllerAdvice {
     @ResponseBody
     @ExceptionHandler(UnauthorizedChangeException.class)
