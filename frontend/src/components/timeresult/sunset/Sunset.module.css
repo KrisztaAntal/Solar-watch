@@ -1,0 +1,11 @@
+.sunset{
+    margin: 0.5em auto;
+    text-align: center;
+    background: #53795f;
+    border-radius: 3em;
+    padding: 1em;
+    min-width: 15em;
+}
+@media (max-width: 768px) {
+    min-width: 75vw;
+}

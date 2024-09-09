@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 function LoginForm() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
     const {login} = useUser();
 
     const handleSubmit = (e) => {
@@ -14,6 +15,7 @@ function LoginForm() {
             username,
             password
         })
+        navigate("/solar-watch")
     }
 
     return (

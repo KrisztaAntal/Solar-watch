@@ -42,11 +42,12 @@ const UserProvider = ({children}) => {
         })
             .then((res) => res.json())
             .then((res) => {
-                const {token} = res;
-                if (token) {
-                    setToken(token);
-                    getMe(token);
-                    console.log("User logged in")
+                const {jwt} = res;
+                if (jwt) {
+                    setToken(jwt);
+                    getMe(jwt);
+                    console.log("User logged in");
+                    console.log(jwt)
                 }
             })
     }

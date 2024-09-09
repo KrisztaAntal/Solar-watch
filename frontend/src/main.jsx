@@ -7,6 +7,7 @@ import NavBar from "./components/navbar/NavBar.jsx";
 import UserProvider from "./context/UserProvider.jsx";
 import SignUpPage from "./pages/signuppage/SignUpPage.jsx";
 import LogInPage from "./pages/loginpage/LoginPage.jsx";
+import SolarWatchPage from "./pages/solarwatchpage/SolarWatchPage.jsx";
 
 
 const router = createBrowserRouter([{
@@ -24,6 +25,10 @@ const router = createBrowserRouter([{
         {
             path: "/login",
             element: <LogInPage/>
+        },
+        {
+            path: "/solar-watch",
+            element: <SolarWatchPage/>
         }
     ]
 }
