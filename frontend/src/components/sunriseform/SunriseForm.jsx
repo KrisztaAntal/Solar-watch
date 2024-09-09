@@ -1,5 +1,5 @@
 import {useState} from "react";
-import styles from "./SunRiseForm.module.css"
+import styles from "./SunriseForm.module.css"
 
 function SunRiseForm({onSave}) {
     const [date, setDate] = useState("");

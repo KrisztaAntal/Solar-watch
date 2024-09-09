@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 public class CityService {
-    @Value("${codecool.app.api.key}")
+    @Value("${codecool.app.apiKey}")
     private String API_KEY;
 
     private final WebClient webClient;

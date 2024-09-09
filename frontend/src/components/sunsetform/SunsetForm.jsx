@@ -7,9 +7,6 @@ function SunsetForm({onSave}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-/*
-        console.log({date, city})
-*/
         return onSave({
             date,
             city

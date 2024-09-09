@@ -1,5 +1,5 @@
 import {useState} from "react";
-import styles from "./SignupForm.module.css";
+import styles from "./SignUpForm.module.css";
 
 function SignupFrom({onSave}) {
     const [username, setUsername] = useState("");
