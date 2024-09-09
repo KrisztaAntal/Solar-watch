@@ -3,7 +3,11 @@ Tells utc sunrise and sunset times given a date and a city name.
 It connects to a database to store users, sunset and sunrise times.
 Only registered users can get sunset and sunrise times.
 If the connected postgresql database doesn't have the asked sunset or sunrise time it connects to external apis to retrieve and store the needed informations
+
+
 (https://openweathermap.org/api - to get longitude and latitude value sending city name)
+
+
 (https://sunrise-sunset.org/api - to get sunset and sunrise times sending date, longitude and latitude)
 
 ![solar-watch](https://github.com/user-attachments/assets/5a2bbe16-01af-42c4-bfbb-9843b9432e43)
