@@ -15,10 +15,20 @@ If the connected postgresql database doesn't have the asked sunset or sunrise ti
 
 ## How to run
 Prequisites:
+
+
 Docker
+
+
 Registration to https://openweathermap.org/ to obtain api key (it has a free plan up to 1000 calls/day)
+
+
 Generate a JWT secret: a-32-character-ultra-secure-and-ultra-long-secret
+
+
 Fill in a .env in the projects root directory as the .env.example shows
+
+
 Write docker compose up in root directory of the project in the terminal 
 
 ## Used Technologies
