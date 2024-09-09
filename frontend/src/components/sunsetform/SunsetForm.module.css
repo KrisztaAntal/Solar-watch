@@ -1,0 +1,45 @@
+.form {
+    height: fit-content;
+    padding: 1.8em 2.5em;
+    background-color: #53795f;
+    border-radius: 3em;
+    width: fit-content;
+    margin: auto;
+    filter: drop-shadow(0 0.5rem 0.8rem black);
+
+}
+
+.formInput {
+    margin-top: 2em;
+}
+
+.form input{
+    min-height: 2em;
+    margin-top: 0.5em;
+    min-width: 15vw;
+}
+
+.formButton {
+    margin-top: 3em;
+    margin-bottom: 1em;
+    background-color: #23543e;
+    border-radius: 1.5em;
+    padding: 1em;
+    color: white;
+    border: none;
+    filter: drop-shadow(0 0.2rem 0.1rem black);
+}
+
+.formButton:hover{
+    background-color: #83a092;
+}
+.formButton:active{
+    background-color: black;
+    color: white;
+    filter: drop-shadow(0 0.01rem 0.05rem black);
+
+}
+
+.formButton h2{
+    margin: 0;
+}

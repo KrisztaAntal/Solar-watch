@@ -1,0 +1,51 @@
+.page{
+    align-content: center;
+    min-height: 85vh;
+
+}
+
+.getTimeButtons{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.timeButton {
+    margin: 3em auto 1em;
+    background-color: #23543e;
+    border-radius: 1.5em;
+    padding: 2em;
+    color: white;
+    border: none;
+    filter: drop-shadow(0 0.2rem 0.1rem black);
+}
+
+.timeButton:hover{
+    background-color: #83a092;
+}
+.timeButton:active{
+    background-color: black;
+    color: white;
+    filter: drop-shadow(0 0.01rem 0.05rem black);
+
+}
+
+.timeButton h2{
+    margin: 0;
+}
+
+.sunriseDiv{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.sunsetDiv{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+}
+
+@media (max-width: 768px) {
+
+}

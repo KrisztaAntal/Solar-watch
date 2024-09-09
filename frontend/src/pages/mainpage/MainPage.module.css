@@ -1,0 +1,29 @@
+.main {
+    align-content: center;
+    min-height: 90vh;
+    text-align: center;
+    background-image: url('pexels-pixabay-462023.jpg');
+    background-position: center;
+}
+
+.main h1{
+    filter: drop-shadow(0 0 0.3rem black);
+margin: auto;
+    padding-bottom: 0.3em;
+    font-size: xxx-large;
+}
+.main h3{
+    filter: drop-shadow(0 0 0.3rem black);
+    max-width: 80vw;
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .main{
+        align-content: start;
+    }
+
+    .main h1{
+        padding-top: 2em;
+    }
+}
