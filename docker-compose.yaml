@@ -12,7 +12,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: backend
+    container_name: solar-watch-backend
     depends_on:
       - db
     environment:
@@ -21,8 +21,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - JWT_SECRET=${JWT_SECRET}
-      - API_KEY=${OPEN_WEATHER_API_KEY}
-      - JWT_EXPIRATION_MS=${JWT_EXP}
+      - OPEN_WEATHER_API_KEY=${OPEN_WEATHER_API_KEY}
+      - JWT_EXP=${JWT_EXP}
       - SPRING_SQL_INIT_MODE=always
       - SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION=true
 
@@ -32,10 +32,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: frontend
+    container_name: solar-watch-frontend
     depends_on:
       - backend
     ports:
-      - "5173:5173"
-    environment:
-      - BACKEND_HOST=backend
+      - "5173:3111"
