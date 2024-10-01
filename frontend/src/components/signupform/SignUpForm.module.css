@@ -52,3 +52,9 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+
+.instruction{
+    font-size: x-small;
+    max-width: 23em;
+    margin-top: 1em;
+}
