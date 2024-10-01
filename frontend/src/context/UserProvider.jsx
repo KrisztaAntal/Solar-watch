@@ -16,7 +16,7 @@ const getInitialState = () => {
 const UserProvider = ({children}) => {
     const [user, setUser] = useState(getInitialState);
 
-    const getMe = useCallback((token) => {
+    const getMe = (token) => {
         fetch("/api/auth/me", {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -26,7 +26,7 @@ const UserProvider = ({children}) => {
             .then((user) => {
                 setUser(user);
             });
-    }, []);
+    };
 
     useEffect(() => {
         sessionStorage.setItem("currentUser", JSON.stringify(user))
@@ -59,7 +59,7 @@ const UserProvider = ({children}) => {
     }
 
     return (
-        <UserContext.Provider value={{user, login, logout}}>
+        <UserContext.Provider value={{user, login, logout, getMe}}>
             {children}
         </UserContext.Provider>
     );

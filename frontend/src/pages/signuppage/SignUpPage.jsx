@@ -24,12 +24,8 @@ function SignUpPage() {
     const navigate = useNavigate();
 
     const handleRegistration = (member) => {
-        try {
             createUser(member)
             navigate("/login");
-        } catch {
-            throw new Error("Could not register user")
-        }
     }
 
     return (<>
