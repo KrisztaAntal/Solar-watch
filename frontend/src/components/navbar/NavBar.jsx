@@ -7,6 +7,7 @@ import {useUser} from "../../context/UserProvider.jsx";
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const navigate = useNavigate();
     const {user, logout} = useUser();
 
@@ -17,6 +18,10 @@ function NavBar() {
     useEffect(() => {
         if (user) {
             setIsLoggedIn(true)
+            const hasAdminRole = user.roles.some((role)=> role.name === "ROLE_ADMIN");
+            if (hasAdminRole){
+                setIsAdmin(true);
+            } else {setIsAdmin(false)}
         }
     }, [user])
 
@@ -42,9 +47,16 @@ function NavBar() {
                         <Link to={"/solar-watch"} onClick={() => setIsOpen(false)}>
                             Get times
                         </Link>
+                        <Link to={"/user-page"} onClick={() => setIsOpen(false)}>
+                            User page
+                        </Link>
+                        {isAdmin &&  <Link to={"/admin-page"} onClick={() => setIsOpen(false)}>
+                            Admin page
+                        </Link>}
                         <Link to={"/"} onClick={() => {
                             logout();
                             setIsLoggedIn(false);
+                            setIsAdmin(false);
                         }}>Logout</Link>
                     </>
                     }
