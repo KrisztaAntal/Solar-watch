@@ -3,6 +3,7 @@ import styles from "./NavBar.module.css";
 import {useEffect, useState} from "react";
 import Footer from "../footer/Footer.jsx";
 import {useUser} from "../../context/UserProvider.jsx";
+import logo from "../../assets/solar-watch-logo.svg";
 
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ function NavBar() {
     return (
         <>
             <nav className={styles.navbar}>
-                <div className={styles.logo} onClick={() => navigate("/")}>SolarWatch</div>
+                <div className={styles.logo} onClick={() => navigate("/")}><img src={logo} alt={"SolarWatch"}/></div>
                 <button className={styles.hamburger} onClick={toggleMenu}>
                     ☰
                 </button>

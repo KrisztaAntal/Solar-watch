@@ -14,6 +14,10 @@
     width: fit-content;
 }
 
+.logo img{
+    max-width: 12em;
+}
+
 .hamburger {
     display: none;
     background: none;
