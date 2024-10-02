@@ -13,38 +13,75 @@
     margin: auto;
     filter: drop-shadow(0 0.5rem 0.8rem black);
 }
-.userName{
-    display: flex;
-}
-.pencil{
+
+.pencil {
     font-size: 1.5rem;
-    rotate:145deg;
+    rotate: 145deg;
     color: white;
     margin-top: 0.5em;
 }
-.pencil:hover{
-    font-size: 2rem;
+
+.pencil:hover {
+    color: orange;
 }
 
-.pencil:active{
+.pencil:active {
     color: black;
 
 }
-.pencilButton{
+
+.pencilButton {
     background: none;
     border: none;
 }
 
-.form{
+.userName{
+    display: flex;
+}
+.userName h1{
+    margin: 0;
+}
+.email{
+    display: flex;
+    margin-bottom: 0.5em;
 }
 
-.inputDivInForm{
+
+.nameInputDivInForm{
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+    gap: 1em;
+    min-width: 10em;
+}
+
+.emailInputDivInForm{
+    margin-bottom: 1.5em;
+    margin-top: 0.5em;
+    gap: 1em;
+    min-width: 10em;
+}
+
+.passwordInputDivInForm{
+    margin-bottom: 1.5em;
+    margin-top: 0.5em;
+    gap: 1em;
+    min-width: 10em;
+}
+
+.changeInput{
+    flex-grow: 2;
+    padding-left: 0.5em;
+}
+.passwordChangeInputsDiv{
+    flex-grow: 2;
+}
+.buttons{
     display: flex;
-    margin-bottom: 1em;
+    gap: 0.5em;
+    margin-top: 1em;
 }
 
 .formButton{
-    margin: 0 0 0 1em;
     background-color: #23543e;
     border-radius: 1.5em;
     padding: 1em;
@@ -63,6 +100,17 @@
 
 }
 
+.error {
+    color: red;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: small;
+    padding: 0.5em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .instruction{
     font-size: small;
+    margin-bottom: 1em;
+    max-width: 15em;
 }
