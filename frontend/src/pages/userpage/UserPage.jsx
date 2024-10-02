@@ -215,7 +215,11 @@ function UserPage() {
                             </div>
                         </form>
                         :
-                        <button className={styles.formButton} onClick={() => setPasswordUnderChange(true)}>Change
+                        <button className={styles.formButton} onClick={() => {
+                            setPasswordUnderChange(true);
+                            setEmailUnderChange(false);
+                            setNameUnderChange(false);
+                        }}>Change
                             password
                         </button>
                     }
