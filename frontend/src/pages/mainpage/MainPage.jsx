@@ -6,7 +6,7 @@ function MainPage() {
     return (
         <div className={styles.main} >
             <h1>Welcome to SolarWatch!</h1>
-            {!user && <h3>Please register or login to search sunset or sunrise times.</h3>}
+            {!user ? <h3>Please register or login to search sunset or sunrise times.</h3>:<h3>Get sunset or sunrise times on the 'Get&nbsp;times' page.</h3>}
         </div>
     )
 }
