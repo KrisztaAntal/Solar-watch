@@ -23,20 +23,20 @@ function SignupFrom({onSave}) {
                 username,
                 email,
                 password
-            })
+            });
         }
     }
 
-    const changeErrorStateBasedOnUserDataValidation = (validEmail, validUser, validPassword)=>{
+    const changeErrorStateBasedOnUserDataValidation = (validEmail, validUser, validPassword) => {
         if (validUser) {
             setUsernameError(false);
         } else {
             setUsernameError(true);
         }
         if (validEmail) {
-            setEmailError(false)
+            setEmailError(false);
         } else {
-            setEmailError(true)
+            setEmailError(true);
         }
         if (validPassword) {
             setPassError(false);
@@ -46,49 +46,46 @@ function SignupFrom({onSave}) {
     }
 
     return (
-        <>
-            <form className={styles.form} onSubmit={handleSubmit}>
-                <div className={styles.formInput}>
-                    <label>Username:<br/>
-                        {usernameError && <p className={styles.error}>Invalid username.</p>}
-                        <input value={username}
-                               onChange={(e) => setUsername(e.target.value)}
-                               name={"username"}
-                               id={"username"}/>
-                    </label>
-                    <p className={styles.instruction}>Username can only contain abc letters, numbers and
-                        (&nbsp;_&nbsp;-&nbsp;.&nbsp;) characters</p>
-                </div>
-                <div className={styles.formInput}>
-                    <label>Email:<br/>
-                        {emailError && <p className={styles.error}>Wrong email form, please add a valid email.</p>}
-                        <input value={email}
-                               type={email}
-                               onChange={(e) => setEmail(e.target.value)}
-                               name={"email"}
-                               id={"email"}/>
-                    </label>
-                </div>
-                <div className={styles.formInput}>
-                    <label>Password:<br/>
-                        <input type={"password"} value={password}
-                               onChange={(e) => setPassword(e.target.value)}
-                               name={"password"}
-                               id={"password"}/><br/>
-                    </label>
-                </div>
-                <div className={styles.formInput}>
-                    <label>Password again:<br/>
-                        {passError && <p className={styles.error}>Repeated password is different.</p>}
-                        <input type={"password"} value={passwordRepeat}
-                               onChange={(e) => setPasswordRepeat(e.target.value)}
-                               name={"passwordRepeat"}
-                               id={"passwordRepeat"}/><br/>
-                    </label>
-                </div>
-                <button className={styles.formButton}><h2>SignUp</h2></button>
-            </form>
-        </>
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.formInput}>
+                <label>Username:<br/>
+                    {usernameError && <p className={styles.error}>Invalid username.</p>}
+                    <input value={username}
+                           onChange={(e) => setUsername(e.target.value)}
+                           name={"username"}
+                           id={"username"}/>
+                </label>
+                <p className={styles.instruction}>Username can only contain abc letters, numbers and (&nbsp;_&nbsp;-&nbsp;.&nbsp;) characters</p>
+            </div>
+            <div className={styles.formInput}>
+                <label>Email:<br/>
+                    {emailError && <p className={styles.error}>Wrong email form, please add a valid email.</p>}
+                    <input value={email}
+                           type={email}
+                           onChange={(e) => setEmail(e.target.value)}
+                           name={"email"}
+                           id={"email"}/>
+                </label>
+            </div>
+            <div className={styles.formInput}>
+                <label>Password:<br/>
+                    <input type={"password"} value={password}
+                           onChange={(e) => setPassword(e.target.value)}
+                           name={"password"}
+                           id={"password"}/><br/>
+                </label>
+            </div>
+            <div className={styles.formInput}>
+                <label>Repeated password:<br/>
+                    {passError && <p className={styles.error}>Repeated password is different.</p>}
+                    <input type={"password"} value={passwordRepeat}
+                           onChange={(e) => setPasswordRepeat(e.target.value)}
+                           name={"passwordRepeat"}
+                           id={"passwordRepeat"}/><br/>
+                </label>
+            </div>
+            <button className={styles.formButton}><h2>SignUp</h2></button>
+        </form>
     )
 }
 

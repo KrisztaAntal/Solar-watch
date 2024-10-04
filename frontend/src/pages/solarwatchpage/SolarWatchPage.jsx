@@ -38,11 +38,10 @@ const getSunset = (sunsetRequest, navigate) => {
 }
 
 function SolarWatchPage() {
-
-    const navigate = useNavigate();
-    const [setOrRise, setSetOrRise] = useState('');
+    const [setOrRise, setSetOrRise] = useState("");
     const [sunRiseTimeList, setSunRiseTimeList] = useState(null);
-    const [sunSetTimeList, setSunSetTimeList] = useState(null)
+    const [sunSetTimeList, setSunSetTimeList] = useState(null);
+    const navigate = useNavigate();
 
     const handleSunset = (sunsetRequest) => {
         getSunset(sunsetRequest, navigate)
@@ -65,17 +64,23 @@ function SolarWatchPage() {
     return (
         <div className={styles.page}>
             {setOrRise === "" && <div className={styles.getTimeButtons}>
-                <button className={styles.timeButton} onClick={() => {
-                    setSetOrRise("rise");
-                    setSunSetTimeList("");
-                    setSunRiseTimeList("");
-                }}><h2>Get time of sunrise</h2>
+                <button
+                    className={styles.timeButton}
+                    onClick={() => {
+                        setSetOrRise("rise");
+                        setSunSetTimeList("");
+                        setSunRiseTimeList("");
+                    }}
+                ><h2>Get time of sunrise</h2>
                 </button>
-                <button className={styles.timeButton} onClick={() => {
-                    setSetOrRise("set");
-                    setSunSetTimeList("");
-                    setSunRiseTimeList("");
-                }}><h2>Get time of sunset</h2>
+                <button
+                    className={styles.timeButton}
+                    onClick={() => {
+                        setSetOrRise("set");
+                        setSunSetTimeList("");
+                        setSunRiseTimeList("");
+                    }}
+                ><h2>Get time of sunset</h2>
                 </button>
             </div>
             }
