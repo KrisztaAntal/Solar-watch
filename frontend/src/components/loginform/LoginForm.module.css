@@ -32,6 +32,7 @@
 .formButton:hover{
     background-color: #83a092;
 }
+
 .formButton:active{
     background-color: black;
     color: white;
@@ -40,4 +41,13 @@
 
 .formButton h2{
     margin: 0;
+}
+
+.error {
+    color: red;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: small;
+    padding: 0.5em;
+    margin-top: 2em;
+    margin-bottom: 0;
 }

@@ -1,7 +1,6 @@
 import SignupFrom from "../../components/signupform/SignUpForm.jsx";
 import styles from "./SignUpPage.module.css";
 import {useNavigate} from "react-router-dom";
-import {useUser} from "../../context/UserProvider.jsx";
 
 const createUser = (member) => {
     fetch("/api/register", {
@@ -24,19 +23,13 @@ function SignUpPage() {
     const navigate = useNavigate();
 
     const handleRegistration = (member) => {
-        try {
-            createUser(member)
-            navigate("/login");
-        } catch {
-            throw new Error("Could not register user")
-        }
+        createUser(member);
+        navigate("/login");
     }
 
-    return (<>
-            <div className={styles.page}>
-                <SignupFrom className={styles.form} onSave={handleRegistration}/>
-            </div>
-        </>
+    return (<div className={styles.page}>
+            <SignupFrom className={styles.form} onSave={handleRegistration}/>
+        </div>
     )
 }
 

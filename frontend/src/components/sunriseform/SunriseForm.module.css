@@ -6,7 +6,6 @@
     width: fit-content;
     margin: auto;
     filter: drop-shadow(0 0.5rem 0.8rem black);
-
 }
 
 .formInput {
@@ -37,7 +36,6 @@
     background-color: black;
     color: white;
     filter: drop-shadow(0 0.01rem 0.05rem black);
-
 }
 
 .formButton h2{

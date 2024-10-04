@@ -16,10 +16,10 @@ services:
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=${DB_URL}
-      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - DB_URL=${DB_URL}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
       - JWT_SECRET=${JWT_SECRET}
       - OPEN_WEATHER_API_KEY=${OPEN_WEATHER_API_KEY}
       - JWT_EXP=${JWT_EXP}
@@ -28,7 +28,7 @@ services:
 
 
   frontend:
-    image: 'solarwatch-frontend-image:latest'
+    image: 'solarwatch-frontend:latest'
     build:
       context: ./frontend
       dockerfile: Dockerfile

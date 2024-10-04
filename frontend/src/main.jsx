@@ -8,6 +8,7 @@ import UserProvider from "./context/UserProvider.jsx";
 import SignUpPage from "./pages/signuppage/SignUpPage.jsx";
 import LogInPage from "./pages/loginpage/LoginPage.jsx";
 import SolarWatchPage from "./pages/solarwatchpage/SolarWatchPage.jsx";
+import UserPage from "./pages/userpage/UserPage.jsx";
 
 
 const router = createBrowserRouter([{
@@ -29,6 +30,10 @@ const router = createBrowserRouter([{
         {
             path: "/solar-watch",
             element: <SolarWatchPage/>
+        },
+        {
+            path: "/user-page",
+            element: <UserPage/>
         }
     ]
 }
