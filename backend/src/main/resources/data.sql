@@ -1,4 +1,4 @@
-INSERT INTO public.role (is, name)
+INSERT INTO public.role (id, name)
 VALUES (1, 'ROLE_ADMIN'),(2, 'ROLE_USER');
 
 INSERT INTO public.member (id, email, name, password, member_id)
