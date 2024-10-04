@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useEffect, useState} from 'react'
+import React, {createContext, useContext, useEffect, useState} from "react"
 
 const UserContext = createContext({});
 
@@ -15,6 +15,7 @@ const getInitialState = () => {
 // eslint-disable-next-line react/prop-types
 const UserProvider = ({children}) => {
     const [user, setUser] = useState(getInitialState);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const getMe = (token) => {
         fetch("/api/auth/me", {
@@ -29,7 +30,7 @@ const UserProvider = ({children}) => {
     };
 
     useEffect(() => {
-        sessionStorage.setItem("currentUser", JSON.stringify(user))
+        sessionStorage.setItem("currentUser", JSON.stringify(user));
     }, [user])
 
     const login = (credentials) => {
@@ -46,8 +47,8 @@ const UserProvider = ({children}) => {
                 if (jwt) {
                     setToken(jwt);
                     getMe(jwt);
+                    setLoggedIn(true);
                     console.log("User logged in");
-                    console.log(jwt)
                 }
             })
     }
@@ -56,10 +57,11 @@ const UserProvider = ({children}) => {
         setUser(null);
         setToken("");
         setCurrentUser("");
+        setLoggedIn(false);
     }
 
     return (
-        <UserContext.Provider value={{user, login, logout, getMe}}>
+        <UserContext.Provider value={{user, loggedIn, login, logout, getMe}}>
             {children}
         </UserContext.Provider>
     );
