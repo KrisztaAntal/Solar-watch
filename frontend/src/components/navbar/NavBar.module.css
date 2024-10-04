@@ -10,6 +10,7 @@
     z-index: 1000;
     box-sizing: border-box;
 }
+
 .logo{
     width: fit-content;
 }
@@ -43,9 +44,11 @@
     .navbar{
         flex-wrap: wrap;
     }
+
     .hamburger {
         display: block;
     }
+
     .navLinks {
         display: none;
         flex-direction: column;

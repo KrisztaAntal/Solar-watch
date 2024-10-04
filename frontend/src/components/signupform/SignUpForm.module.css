@@ -6,7 +6,6 @@
     width: fit-content;
     margin: auto;
     filter: drop-shadow(0 0.5rem 0.8rem black);
-
 }
 
 .formInput {
@@ -33,11 +32,11 @@
 .formButton:hover{
     background-color: #83a092;
 }
+
 .formButton:active{
     background-color: black;
     color: white;
     filter: drop-shadow(0 0.01rem 0.05rem black);
-
 }
 
 .formButton h2{
@@ -55,6 +54,6 @@
 
 .instruction{
     font-size: x-small;
-    max-width: 23em;
+    max-width: 17em;
     margin-top: 1em;
 }
