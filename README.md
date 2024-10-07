@@ -17,34 +17,42 @@ To get longitude and latitude values for a city the site uses the <a href="https
 To retrieve sunset and sunrise times I used the <a href="https://sunrise-sunset.org/api">Sunrise Sunset API.</a></br> 
 The API needs longitude and latitude values and a date to provide the sunrise and sunset times.</p>
 
+![solar_watch_project_page](https://github.com/user-attachments/assets/7c1dc958-8f48-49f9-91d7-ba507a443896)
+
+## Built with
+
+[![JavaScript]](#) [![React][React.js]][React-url] [![CSS]](#) 
+
+[![Java]][Java-url] [![SpringBoot]][SprinBoot-url] 
+
+[![PostgreSQL]][Postgresql-url]
+
+[![IntelliJ]][IntelliJ-url] [![Git]][Git-url] [![Docker]][Docker-url]  [![Figma]][Figma-url] [![Windows]][Windows-url]
 
 
 
-![solar-watch](https://github.com/user-attachments/assets/5a2bbe16-01af-42c4-bfbb-9843b9432e43)
 
+## Getting Started
 
-## How to run
-Prequisites:
+### Prerequisites
 
+* Download <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>
+* Get a free API Key at <a href="https://openweathermap.org/price">openweathermap.org.</a> They have a free plan up to 1000 calls/day
 
-Docker
+### Installation
 
+1. Clone the repo
+   ```sh
+   git clone https://github.com/KrisztaAntal/Solar-watch.git
+   ```
+2. Generate a JWT secret: a-32-character-ultra-secure-and-ultra-long-secret
+3. Set up environment variables like in the ```.env.example```
+4. Open Docker Desktop
+5. Open a Terminal, then step into the projects directory (use ```cd directory_name``` to step into directory and ```cd ..```to step backwards)
+6. Write ```docker compose up --build``` in terminal
+7. After the build has finished open <a href="http://localhost:5173/">http://localhost:5173/</a> in browser
+8. Sign up with a new user, log in, then get the times
 
-Registration to https://openweathermap.org/ to obtain api key (it has a free plan up to 1000 calls/day)
-
-
-Generate a JWT secret: a-32-character-ultra-secure-and-ultra-long-secret
-
-
-Fill in a .env in the projects root directory as the .env.example shows
-
-
-Write docker compose up in root directory of the project in the terminal 
-
-## Used Technologies
-Java spring boot - as a backend server
-Postgresql - as database
-Vite-React.js - as frontend
 
 ## Pages of website
 ### Main page 
@@ -82,6 +90,38 @@ The app is fully responsive
 ![image 1 (6)](https://github.com/user-attachments/assets/9abb2692-36d6-44a2-8e5b-8fb43156a59a)
 
 ## Credits
-I used a photo for the background from pexels
-https://www.pexels.com/photo/grass-during-sunset-462023/
+<p>I used a photo for the background from <a href="https://www.pexels.com/photo/grass-during-sunset-462023/">Pexels</a>.</p>
+<p>I found the badges <a href="https://github.com/inttter/md-badges?tab=readme-ov-file#-idecode-editors">here.</a></p>
 
+
+
+[JavaScript]: https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000
+
+[React.js]: https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB
+[React-url]: https://reactjs.org/
+
+[CSS]: https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=fff
+
+[Java]: https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white
+[Java-url]: https://www.java.com/en/
+
+[SpringBoot]: https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=Spring&logoColor=white
+[SprinBoot-url]: https://spring.io/projects/spring-boot/
+
+[PostgreSQL]: https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white
+[Postgresql-url]: https://www.postgresql.org/
+
+[Figma]: https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white
+[Figma-url]: https://www.figma.com/
+
+[Docker]: https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff
+[Docker-url]: https://www.docker.com/
+
+[IntelliJ]: https://img.shields.io/badge/IntelliJIDEA-000000.svg?logo=intellij-idea&logoColor=white
+[IntelliJ-url]: https://www.jetbrains.com/idea/
+
+[Git]: https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff
+[Git-url]: https://git-scm.com/
+
+[Windows]: https://custom-icon-badges.demolab.com/badge/Windows-0078D6?logo=windows11&logoColor=white
+[Windows-url]: https://www.microsoft.com/en-us/windows?r=1
