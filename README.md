@@ -1,14 +1,24 @@
-# Solar-watch
-Tells utc sunrise and sunset times given a date and a city name.
-It connects to a database to store users, sunset and sunrise times.
-Only registered users can get sunset and sunrise times.
-If the connected postgresql database doesn't have the asked sunset or sunrise time it connects to external apis to retrieve and store the needed informations
+<div align="center">
+    <a href=https://github.com/github_KrisztaAntal/Solar-watch">
+      <img src="solar_watch_log_black_stand.png" alt="Logo">
+    </a>
+  
+</div>
+
+<p align="center">
+The user can get UTC sunrise and sunset times for the chosen date and city name.</br>
+It lists the date, time and city-data(city, state, country) for all the cities with the given name.</br> 
+For example there is a Paris in Texas (USA), another in Kentucky (USA) and of course there is the capital of France.</br> 
+It connects to a database to store the times, cities and users.
+</p>
+<p align="center">Only registered users can get sunrise and sunset times.</p>
+<p align="center">If the connected PostgreSQL database doesn't have the asked sunset or sunrise time, it connects to external APIs to retrieve and store the needed informations.</br>
+To get longitude and latitude values for a city the site uses the <a href="https://openweathermap.org/api">OpenWeather API</a></br> 
+To retrieve sunset and sunrise times I used the <a href="https://sunrise-sunset.org/api">Sunrise Sunset API.</a></br> 
+The API needs longitude and latitude values and a date to provide the sunrise and sunset times.</p>
 
 
-(https://openweathermap.org/api - to get longitude and latitude value sending city name)
 
-
-(https://sunrise-sunset.org/api - to get sunset and sunrise times sending date, longitude and latitude)
 
 ![solar-watch](https://github.com/user-attachments/assets/5a2bbe16-01af-42c4-bfbb-9843b9432e43)
 
