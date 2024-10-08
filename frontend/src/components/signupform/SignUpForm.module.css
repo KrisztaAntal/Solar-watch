@@ -9,7 +9,7 @@
 }
 
 .formInput {
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .form input{
@@ -50,6 +50,7 @@
     padding: 0.5em;
     margin-top: 0;
     margin-bottom: 0;
+    font-weight: bold;
 }
 
 .instruction{
